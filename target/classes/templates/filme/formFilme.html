@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Spring Boot Simple</title>
+</head>
+<body>
+    <div class="container">
+        <h5>Adicionar Filme</h5>
+        <form method="post">
+            <div class="input-field">
+                <input id="nome" type="text" value="" name="nome" />
+                <label for="nome">Filme</label>
+            </div>
+            <div class="row">
+                <div class="input-field col s2">
+                    <input id="ano" type="text" value="" name="ano" />
+                    <label for="ano">Ano</label>
+                </div>
+                <div class="input-field col s4">
+                    <input id="classificacao" type="text" value="" name="classificacao" />
+                    <label for="classificacao">Classificação</label>
+                </div>
+                <div class="input-field col s4">
+                    <input id="genero" type="text" value="" name="genero" />
+                    <label for="genero">Gênero</label>
+                </div>
+                <div class="input-field col s2">
+                    <input id="data" type="date" value="" name="data" />
+                    <label for="data"></label>
+                </div>
+            </div>
+
+            <h6>
+                <button type="submit" class="waves-effect waves-light btn blue">Adicionar</button>
+                <a href="/filmes" class="waves-effect waves-light btn blue">Lista de Filmes</a>
+            </h6>
+
+        </form>
+    </div>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>
+</html>

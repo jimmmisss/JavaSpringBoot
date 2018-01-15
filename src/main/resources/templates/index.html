@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Spring Boot Simple</title>
+</head>
+<body>
+    <div class="container">
+        <h5>Lista de Filmes</h5>
+
+        <div class="fixed-action-btn">
+            <a href="/addFilme" class="btn-floating btn-large red">
+                <i class="large material-icons">add</i>
+            </a>
+            <ul>
+                <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+                <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+                <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+                <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+            </ul>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Filme</th>
+                    <th>Ano</th>
+                    <th>Classificação</th>
+                    <th>Gênero</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="filme : ${filmes}">
+                    <td><span th:text="${filme.id}"></span></td>
+                    <td>
+                        <a th:href="${(#mvc.url('FC#sobreFilme').arg(0, filme.id)).build()}">
+                            <span th:text="${filme.nome}"></span>
+                        </a>
+                    </td>
+                    <td><span th:text="${filme.ano}"></span></td>
+                    <td><span th:text="${filme.classificacao}"></span></td>
+                    <td><span th:text="${filme.genero}"></span></td>
+                    <td><span th:text="${filme.data}"></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>
+</html>
