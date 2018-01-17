@@ -1,17 +1,20 @@
 package com.simple.configuration;
 
+import org.hibernate.cfg.AvailableSettings;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
-public class Conn {
+@ComponentScan("com.simple")
+public class PersistenceConfig {
 
     @Bean
     public DataSource dataSource(){
@@ -21,6 +24,14 @@ public class Conn {
         dataSource.setUsername("postgres");
         dataSource.setPassword("postgres");
         return dataSource;
+    }
+
+    private Properties getProperties() {
+        Properties properties = new Properties();
+        properties.put(AvailableSettings.HBM2DDL_AUTO, "update");
+        properties.put(AvailableSettings.DIALECT, "org.hibernate.dialect.HSQLDialect");
+        properties.put(AvailableSettings.SHOW_SQL, "true");
+        return properties;
     }
 
     @Bean

@@ -1,5 +1,7 @@
 package com.simple.models;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -13,7 +15,10 @@ public class Ator implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NotEmpty
     private String nome;
+
+    @NotEmpty
     private String personagem;
 
     @ManyToOne

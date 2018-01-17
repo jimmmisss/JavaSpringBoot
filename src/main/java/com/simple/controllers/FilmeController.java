@@ -6,10 +6,14 @@ import com.simple.repository.AtoresRepository;
 import com.simple.repository.FilmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 @Controller
 public class FilmeController {
@@ -26,8 +30,13 @@ public class FilmeController {
     }
 
     @RequestMapping(value = "/addFilme", method = RequestMethod.POST)
-    public String form(Filme filme){
+    public String form(@Valid Filme filme, BindingResult result, RedirectAttributes atributes){
+        if(result.hasErrors()){
+            atributes.addFlashAttribute("mensagem", "Preencha os campos obrigatórios");
+            return "redirect:/addFilme";
+        }
         rf.save(filme);
+        atributes.addFlashAttribute("mensagem", "Filme adicionado com sucesso");
         return "redirect:/addFilme";
     }
 
@@ -49,10 +58,15 @@ public class FilmeController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public String sobreFilmePost(@PathVariable("id") long id, Ator ator){
+    public String sobreFilmePost(@PathVariable("id") long id, @Valid Ator ator, BindingResult result, RedirectAttributes atributes){
+        if (result.hasErrors()){
+            atributes.addFlashAttribute("mensagem", "Verifique os campos");
+            return "redirect:/{id}";
+        }
         Filme filme = rf.findById(id);
         filme.addAtor(ator);
         rf.save(filme);
+        atributes.addFlashAttribute("mensagem", "Ator adcioando com sucesso");
         return "redirect:/{id}";
     }
 
