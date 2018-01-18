@@ -2,7 +2,7 @@ package com.simple.controllers;
 
 import com.simple.models.Ator;
 import com.simple.models.Filme;
-import com.simple.repository.AtoresRepository;
+import com.simple.repository.AtorRepository;
 import com.simple.repository.FilmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ public class FilmeController {
     private FilmeRepository rf;
 
     @Autowired
-    private AtoresRepository ar;
+    private AtorRepository ar;
 
     @RequestMapping(value="/addFilme", method = RequestMethod.GET)
     public String form(){
@@ -55,6 +55,25 @@ public class FilmeController {
         mv.addObject("filme", filme);
         mv.addObject("ator",filme.getAtores());
         return mv;
+    }
+
+    @RequestMapping("/delFilme")
+    public String delFilme(long id){
+        Filme filme = rf.findById(id);
+        rf.delete(filme);
+        return "redirect:/filmes";
+    }
+
+    @RequestMapping("/delAtor")
+    public String delAtor(long id){
+        Ator ator = ar.findById(id);
+        ar.delete(ator);
+
+        Filme filme = ator.getFilme();
+        long idLong = filme.getId();
+        String idAtual = "" + idLong;
+        return "redirect:/" + idAtual;
+
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)

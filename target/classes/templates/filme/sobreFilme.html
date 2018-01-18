@@ -43,7 +43,8 @@
             <div class="col s12">
                 <div class="card">
                     <div class="card-image">
-                        <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">movie</i></a>
+                        <a class="btn-floating halfway-fab waves-effect waves-light red">
+                            <i class="material-icons">movie</i></a>
                     </div>
                     <div class="card-content">
                         <table>
@@ -88,14 +89,14 @@
             </div>
         </form>
 
-
         <h5>Personagens da Série</h5>
-
         <div class="row">
             <div class="col s12">
                 <div class="card">
                     <div class="card-image">
-                        <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">wc</i></a>
+                        <a class="btn-floating halfway-fab waves-effect waves-light red">
+                            <i class="material-icons">wc</i>
+                        </a>
                     </div>
                     <div class="card-content">
                         <table>
@@ -103,12 +104,18 @@
                             <th>ID</th>
                             <th>Nome</th>
                             <th>Personagem</th>
+                            <th>Deletar</th>
                             </thead>
                             <tbody>
                             <tr th:each="ator : ${ator}">
                                 <td><span th:text="${ator.id}"></span></td>
                                 <td><span th:text="${ator.nome}"></span></td>
                                 <td><span th:text="${ator.personagem}"></span></td>
+                                <td>
+                                    <a class="btn-floating blue" th:href="${(#mvc.url('FC#delAtor').arg(0, ator.id)).build()}">
+                                        <i class="material-icons">delete</i>
+                                    </a>
+                                </td>
                             </tr>
                             </tbody>
                         </table>

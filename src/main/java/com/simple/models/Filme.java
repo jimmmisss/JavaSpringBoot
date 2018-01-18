@@ -25,7 +25,7 @@ public class Filme implements Serializable {
     private String data;
 
     //ENTITY GRAPHS
-    @OneToMany(mappedBy = "filme", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "filme", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Ator> atores;
 
     public long getId() {
