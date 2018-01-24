@@ -46,6 +46,7 @@
                     <th>Classificação</th>
                     <th>Gênero</th>
                     <th>Data</th>
+                    <th>Ator</th>
                     <th>Deletar</th>
                 </tr>
             </thead>
@@ -61,8 +62,9 @@
                     <td><span th:text="${filme.classificacao}"></span></td>
                     <td><span th:text="${filme.genero}"></span></td>
                     <td><span th:text="${filme.data}"></span></td>
+                    <td><span th:text="${filme.#total}"></span></td>
                     <td>
-                        <a class="btn-floating blue" th:href="${(#mvc.url('FC#delFilme').arg(0, filme.id)).build()}">
+                        <a class="btn-floating blue" th:href="${(#mvc.url('FC#delFilme').arg(0, filme.id)).build()}" disabled="true">
                             <i class="material-icons">delete</i>
                         </a>
                     </td>

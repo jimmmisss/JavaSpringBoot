@@ -29,6 +29,8 @@ public class FilmeController {
         return "filme/formFilme";
     }
 
+    // MÉTODO QUE INSERE FILME NO BANCO DE DADOS
+    // RETORNA MENSAGEM DE SUCESSO OU FALHA
     @RequestMapping(value = "/addFilme", method = RequestMethod.POST)
     public String form(@Valid Filme filme, BindingResult result, RedirectAttributes atributes){
         if(result.hasErrors()){
@@ -40,14 +42,16 @@ public class FilmeController {
         return "redirect:/addFilme";
     }
 
+    // MÉTODO QUE LISTA FILMES
     @RequestMapping("/filmes")
     public ModelAndView listaFilmes(){
         ModelAndView mv = new ModelAndView("index");
-        Iterable<Filme> filmes = rf.findAll();
+        Iterable<Filme> filmes = rf.findFilmeByContemAtor();
         mv.addObject("filmes", filmes);
         return mv;
     }
 
+    // LISTA FILME E SEUS ATORES - TEMPLATE SOBRE FILME
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ModelAndView sobreFilme(@PathVariable("id") long id){
         Filme filme = rf.findById(id);
@@ -57,6 +61,7 @@ public class FilmeController {
         return mv;
     }
 
+    // MÉTODO QUE DELETA FILME
     @RequestMapping("/delFilme")
     public String delFilme(long id){
         Filme filme = rf.findById(id);
@@ -64,6 +69,7 @@ public class FilmeController {
         return "redirect:/filmes";
     }
 
+    // MÉTODO QUE DELETA ATOR E RETORNA PARA O MESMO LOCAL
     @RequestMapping("/delAtor")
     public String delAtor(long id){
         Ator ator = ar.findById(id);
